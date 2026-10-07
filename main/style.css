@@ -1,0 +1,211 @@
+:root {
+    --primaryColor: #4f46e5;
+    --primaryHover: #4338ca;
+    --backgroundColor: #0f172a;
+    --surfaceColor: rgba(30, 41, 59, 0.7);
+    --surfaceBorder: rgba(255, 255, 255, 0.1);
+    --textColor: #f8fafc;
+    --textMuted: #94a3b8;
+    --fontFamily: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--backgroundColor);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.25) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.15) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--textColor);
+    font-family: var(--fontFamily);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pageWrapper {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.mainHeader {
+    background: var(--surfaceColor);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--surfaceBorder);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    text-align: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+}
+
+.brandLogo {
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.contentContainer {
+    background: var(--surfaceColor);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--surfaceBorder);
+    border-radius: 1.25rem;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.heroSection {
+    text-align: center;
+}
+
+.heroTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.heroSubtitle {
+    color: var(--textMuted);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputLabel {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--textMuted);
+}
+
+.textAreaInput {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background-color: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--surfaceBorder);
+    border-radius: 0.625rem;
+    color: var(--textColor);
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+    min-height: 120px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.textAreaInput:focus {
+    border-color: var(--primaryColor);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.textAreaInput::placeholder {
+    color: rgba(148, 163, 184, 0.5);
+}
+
+.submitButton {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background-color: var(--primaryColor);
+    color: #ffffff;
+    border: none;
+    border-radius: 0.625rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.submitButton:hover {
+    background-color: var(--primaryHover);
+}
+
+.submitButton:active {
+    transform: scale(0.98);
+}
+
+.notificationModal {
+    margin: auto;
+    border: 1px solid var(--surfaceBorder);
+    border-radius: 1rem;
+    padding: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--textColor);
+    width: min(90vw, 400px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.notificationModal::backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+}
+
+.modalContent {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+.modalTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.modalMessage {
+    color: var(--textMuted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.modalButton {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--surfaceBorder);
+    color: var(--textColor);
+    border: 1px solid var(--surfaceBorder);
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.modalButton:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modalButton:active {
+    transform: scale(0.98);
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="pageWrapper">
+        <header class="mainHeader">
+            <h1 class="brandLogo">Portal</h1>
+        </header>
+
+        <main class="contentContainer">
+            <section class="heroSection">
+                <h2 class="heroTitle">Send Feedback</h2>
+                <p class="heroSubtitle">We would love to hear your thoughts. Enter your message below.</p>
+            </section>
+
+            <form id="mailForm" class="contactForm">
+                <div class="inputGroup">
+                    <label for="mail" class="inputLabel">Feedback Message</label>
+                    <textarea id="message" name="mail" class="textAreaInput" rows="5" placeholder="Write your feedback here..." required></textarea>
+                </div>
+                <button type="submit" class="submitButton">Submit Feedback</button>
+            </form>
+        </main>
+    </div>
+
+    <dialog id="notificationModal" class="notificationModal">
+        <div class="modalContent">
+            <h2 id="notificationTitle" class="modalTitle">Success</h2>
+            <p id="notificationMessage" class="modalMessage">Your message has been sent.</p>
+            <button id="notificationButton" class="modalButton" onclick="closeNotification()">OK</button>
+        </div>
+    </dialog>
+
+    <script>
+        const formElement = document.getElementById('mailForm');
+        const notifincationModal = document.getElementById('notificationModal');
+        const notificationTitle = document.getElementById('notificationTitle');
+        const notificationMessage = document.getElementById('notificationMessage');
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        
+        const backendUrl = isLocal ? 'http://localhost:8080/api/contact' : 'https://uselesswebsitebackend.onrender.com/api/contact';
+
+        function closeNotification() {
+            notifincationModal.close();
+        }
+
+        formElement.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(formElement);
+            const payload = Object.fromEntries(formData.entries());
+
+            notificationTitle.textContent = 'Please wait...';
+            notificationMessage.textContent = 'Sending request, this might take a minute';
+            notifincationModal.showModal();
+
+            try {
+                const response = await fetch(backendUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const responseData = await response.json();
+                console.log(responseData);
+
+                if (response.ok) {
+                    notificationTitle.textContent = 'Success!';
+                } else {
+                    console.error('Bad response:', responseData.message);
+                    notificationTitle.textContent = 'Request failed!';
+                }
+                notificationMessage.textContent = responseData.message || 'Done';
+            } catch (error) {
+                console.error('Failed to fetch response:', error.message);
+                notificationTitle.textContent = 'Request failed!';
+                notificationMessage.textContent = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
